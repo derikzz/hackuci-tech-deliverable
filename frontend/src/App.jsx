@@ -7,7 +7,7 @@ function App() {
 	const [quotes, setQuotes] = useState([]);
 	const [date, setDate] = useState("");
 
-	const fetchQuotes = (date = "") => {
+	const fetchQuotes = async (date = "") => {
 		let url = "/api/quotes"
 		if(date) {
 			url += `?date=${date}`
@@ -26,6 +26,25 @@ function App() {
 	const handleGetQuotes = () => {
 		fetchQuotes(date)
 	}
+
+	const handleSubmit = async (event) => {
+		event.preventDefault(); // Prevent the refresh!
+
+		const formData = new FormData(event.target)
+
+		await fetch("api/quote", {
+			method: "POST",
+			body: formData
+		})
+
+		if(date) {
+			await fetchQuotes(date);
+		} else {
+			await fetchQuotes();
+		}
+
+		event.target.reset();
+	}
 	
 	return (
 		<div className="App">
@@ -34,7 +53,7 @@ function App() {
 
 			<h2>Submit a quote</h2>
 			{/* TODO: implement custom form submission logic to not refresh the page */}
-			<form action="/api/quote" method="post">
+			<form onSubmit = { handleSubmit }>
 				<label htmlFor="input-name">Name</label>
 				<input type="text" name="name" id="input-name" required />
 				<label htmlFor="input-message">Quote</label>
