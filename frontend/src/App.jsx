@@ -1,6 +1,16 @@
 import "./App.css";
+import React, { useState, useEffect } from "react";
 
 function App() {
+	const [quotes, setQuotes] = useState([]);
+
+	useEffect(() => {
+		fetch("/api/quotes")
+		.then((response) => response.json())
+		.then((data) => setQuotes(data))
+		.catch((error) => console.error("Error fetching quotes:", error))
+	}, []);
+	
 	return (
 		<div className="App">
 			{/* TODO: include an icon for the quote book */}
@@ -19,9 +29,12 @@ function App() {
 			<h2>Previous Quotes</h2>
 			{/* TODO: Display the actual quotes from the database */}
 			<div className="messages">
-				<p>Peter Anteater</p>
-				<p>Zot Zot Zot!</p>
-				<p>Every day</p>
+				{quotes.map((quote, index) => (
+					<div key = {index} className = "quote">
+						<p>Name: {quote.name}</p>
+						<p>Quote: {quote.message}</p>
+					</div>
+				))}	
 			</div>
 		</div>
 	);

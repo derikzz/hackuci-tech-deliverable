@@ -1,8 +1,8 @@
 from contextlib import asynccontextmanager
-from datetime import datetime
-from typing import AsyncIterator
+from datetime import datetime, timedelta
+from typing import AsyncIterator, List
 
-from fastapi import FastAPI, Form, status
+from fastapi import FastAPI, Form, Query, status
 from fastapi.responses import RedirectResponse
 from typing_extensions import TypedDict
 
@@ -48,3 +48,15 @@ def post_message(name: str = Form(), message: str = Form()) -> RedirectResponse:
 
 
 # TODO: add another API route with a query parameter to retrieve quotes based on max age
+
+@app.get("/quotes")
+def get_quotes_max_age(max_age: int = Query(1)) -> List[Quote]:
+    """
+    Gets all quotes that are younger than a maximum age in seconds.
+    """
+
+    now = datetime.now()
+    time = now - timedelta(days = max_age)
+    quotes_to_return = [q for q in database["quotes"] if datetime.fromisoformat(q["time"]) >= time]
+    
+    return quotes_to_return
