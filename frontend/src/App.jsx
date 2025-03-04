@@ -1,4 +1,5 @@
 import "./App.css";
+import DatePicker from "./components/DatePicker"
 import QuoteBlock from "./components/QuoteBlock"
 import React, { useState, useEffect } from "react";
 
@@ -12,10 +13,6 @@ function App() {
 		.then((data) => setQuotes(data))
 		.catch((error) => console.error("Error fetching quotes:", error))
 	}, []);
-
-	const handleDateChange = (event) => {
-		setDate(event.target.value)
-	};
 
 	const handleGetQuotes = () => {
 		fetch(`/api/quotes?date=${date}`)
@@ -40,12 +37,11 @@ function App() {
 			</form>
 
 			<h2>Earliest Date to Retrieve Quotes</h2>
-			<input
-				type = "date"
-				value = { date }
-				onChange = { handleDateChange }
+			<DatePicker
+				date = { date }
+				setDate = { setDate }
+				onSelect = { handleGetQuotes }
 			/>
-			<button onClick = { handleGetQuotes }>Get Quotes</button>
 
 			<h2>Previous Quotes</h2>
 			<div className="messages">

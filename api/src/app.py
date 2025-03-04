@@ -54,8 +54,6 @@ def get_quotes_max_age(date: str = Query((datetime.now() - timedelta(1)).strftim
     """
     Gets all quotes that are younger than a maximum age in seconds.
     """
-    print(date)
-
     time = datetime.strptime(date, "%Y-%m-%d")
     quotes_to_return = [q for q in database["quotes"] if datetime.fromisoformat(q["time"]) >= time]
     
