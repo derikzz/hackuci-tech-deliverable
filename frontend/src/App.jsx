@@ -7,18 +7,24 @@ function App() {
 	const [quotes, setQuotes] = useState([]);
 	const [date, setDate] = useState("");
 
+	const fetchQuotes = (date = "") => {
+		let url = "/api/quotes"
+		if(date) {
+			url += `?date=${date}`
+		}
+		
+		fetch(url)
+			.then((response) => response.json())
+			.then((data) => setQuotes(data))
+			.catch((error) => console.error("Error fetching quotes:", error))
+	}
+
 	useEffect(() => {
-		fetch("/api/quotes")
-		.then((response) => response.json())
-		.then((data) => setQuotes(data))
-		.catch((error) => console.error("Error fetching quotes:", error))
+		fetchQuotes()
 	}, []);
 
 	const handleGetQuotes = () => {
-		fetch(`/api/quotes?date=${date}`)
-		.then((response) => response.json())
-		.then((data) => setQuotes(data))
-		.catch((error) => console.error("Error fetching quotes:", error))
+		fetchQuotes(date)
 	}
 	
 	return (
