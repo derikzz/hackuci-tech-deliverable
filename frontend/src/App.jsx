@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 
 function App() {
 	const [quotes, setQuotes] = useState([]);
+	const [date, setDate] = useState("");
 
 	useEffect(() => {
 		fetch("/api/quotes")
@@ -11,6 +12,17 @@ function App() {
 		.then((data) => setQuotes(data))
 		.catch((error) => console.error("Error fetching quotes:", error))
 	}, []);
+
+	const handleDateChange = (event) => {
+		setDate(event.target.value)
+	};
+
+	const handleGetQuotes = () => {
+		fetch(`/api/quotes?date=${date}`)
+		.then((response) => response.json())
+		.then((data) => setQuotes(data))
+		.catch((error) => console.error("Error fetching quotes:", error))
+	}
 	
 	return (
 		<div className="App">
@@ -27,8 +39,15 @@ function App() {
 				<button type="submit">Submit</button>
 			</form>
 
+			<h2>Earliest Date to Retrieve Quotes</h2>
+			<input
+				type = "date"
+				value = { date }
+				onChange = { handleDateChange }
+			/>
+			<button onClick = { handleGetQuotes }>Get Quotes</button>
+
 			<h2>Previous Quotes</h2>
-			{/* TODO: Display the actual quotes from the database */}
 			<div className="messages">
 				{quotes.map((quote, index) => (
 					<div key = { index }>

@@ -50,13 +50,13 @@ def post_message(name: str = Form(), message: str = Form()) -> RedirectResponse:
 # TODO: add another API route with a query parameter to retrieve quotes based on max age
 
 @app.get("/quotes")
-def get_quotes_max_age(max_age: int = Query(1)) -> List[Quote]:
+def get_quotes_max_age(date: str = Query((datetime.now() - timedelta(1)).strftime("%Y-%m-%d"))) -> List[Quote]:
     """
     Gets all quotes that are younger than a maximum age in seconds.
     """
+    print(date)
 
-    now = datetime.now()
-    time = now - timedelta(days = max_age)
+    time = datetime.strptime(date, "%Y-%m-%d")
     quotes_to_return = [q for q in database["quotes"] if datetime.fromisoformat(q["time"]) >= time]
     
     return quotes_to_return
