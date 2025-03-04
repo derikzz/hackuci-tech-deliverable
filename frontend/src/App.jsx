@@ -1,4 +1,5 @@
 import "./App.css";
+import QuoteBlock from "./components/QuoteBlock"
 import React, { useState, useEffect } from "react";
 
 function App() {
@@ -30,9 +31,8 @@ function App() {
 			{/* TODO: Display the actual quotes from the database */}
 			<div className="messages">
 				{quotes.map((quote, index) => (
-					<div key = {index} className = "quote">
-						<p>Name: {quote.name}</p>
-						<p>Quote: {quote.message}</p>
+					<div key = { index }>
+						<QuoteBlock quote = { quote } />
 					</div>
 				))}	
 			</div>
