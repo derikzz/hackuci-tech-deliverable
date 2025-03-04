@@ -1,7 +1,9 @@
-import "./App.css";
-import DatePicker from "./components/DatePicker"
-import QuoteBlock from "./components/QuoteBlock"
 import React, { useState, useEffect } from "react";
+import "./App.css";
+import DatePicker from "./components/DatePicker";
+import QuoteBlock from "./components/QuoteBlock";
+import quotebook from "./assets/quotebook.webp";
+
 
 function App() {
     const today = new Date().toISOString().split("T")[0];
@@ -50,7 +52,12 @@ function App() {
 	
 	return (
 		<div className="App">
-			{/* TODO: include an icon for the quote book */}
+			<img
+				src = { quotebook }
+				alt = "Quotebook Icon"
+				style = {{ width: "50px", height: "50px" }}
+			/>
+			
 			<h1>Hack at UCI Tech Deliverable</h1>
 
 			<h2>Submit a quote</h2>
