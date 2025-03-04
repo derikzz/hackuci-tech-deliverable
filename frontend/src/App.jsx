@@ -4,8 +4,10 @@ import QuoteBlock from "./components/QuoteBlock"
 import React, { useState, useEffect } from "react";
 
 function App() {
+    const today = new Date().toISOString().split("T")[0];
+
 	const [quotes, setQuotes] = useState([]);
-	const [date, setDate] = useState("");
+	const [date, setDate] = useState(today);
 
 	const fetchQuotes = async (date = "") => {
 		let url = "/api/quotes"
@@ -52,7 +54,6 @@ function App() {
 			<h1>Hack at UCI Tech Deliverable</h1>
 
 			<h2>Submit a quote</h2>
-			{/* TODO: implement custom form submission logic to not refresh the page */}
 			<form onSubmit = { handleSubmit }>
 				<label htmlFor="input-name">Name</label>
 				<input type="text" name="name" id="input-name" required />
