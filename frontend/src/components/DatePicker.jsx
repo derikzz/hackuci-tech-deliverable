@@ -7,7 +7,7 @@ function DateFilter({ date, setDate, onSelect }) {
 
     return (
         <div>
-            <p className = "text-2xl font-bold mb-4 mt-4">Retrieve Quotes</p>
+            <p className = "text-3xl font-bold mb-4 mt-4">Retrieve Quotes</p>
             <p className = "text-med font-medium mb-4">All quotes created from the selected date until the current time will be displayed.</p>
             <input
                 type="date"

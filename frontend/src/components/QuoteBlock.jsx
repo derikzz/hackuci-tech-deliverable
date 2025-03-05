@@ -1,8 +1,8 @@
 const QuoteBlock = ({ quote }) => {
     return (
         <div>
-           <p>Quote: { quote.message }</p>
-            <p>Name: { quote.name }</p>
+            <p className = "text-2xl font-medium mb-1">{ quote.message }</p>
+            <p className = "text-lg">author: <strong>{ quote.name }</strong></p>
         </div>
     );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import DatePicker from "./components/DatePicker";
 import HackHeader from "./components/HackHeader";
-import QuoteBlock from "./components/QuoteBlock";
+import QuoteList from "./components/QuoteList";
 
 
 function App() {
@@ -56,8 +56,8 @@ function App() {
 
 			<main className = "flex-grow p-4 ">
 				<section className = "bg-white max-w">
-					<div className = "max-w-md mx-auto mb-4 p-4">
-						<p className = "text-2xl font-bold mb-4" >Submit a quote</p>
+					<div className = "max-w-xl mx-auto mb-4 p-4">
+						<p className = "text-3xl font-bold mb-4" >Submit a quote</p>
 						<form onSubmit = { handleSubmit } className = "space-y-4">
 							<label htmlFor="input-name" className = "font-semibold mb-2">Name</label>
 							<input type="text" name="name" id="input-name" required className = "w-full border border-blue-300 rounded p-2"/>
@@ -69,7 +69,7 @@ function App() {
 				</section>
 
 				<section className = "bg-gray-100 max-w">
-					<div className = "max-w-md mx-auto mb-4 p-4">
+					<div className = "max-w-xl mx-auto mb-4 p-4">
 						<DatePicker
 							date = { date }
 							setDate = { setDate }
@@ -79,14 +79,8 @@ function App() {
 				</section>
 
 				<section className = "bg-white max-w">
-					<div className="max-w-md mx-auto mb-4 p-4">
-						<p className = "text-2xl font-bold mb-4">All Quotes</p>
-
-						{quotes.map((quote, index) => (
-							<div key = { index }>
-								<QuoteBlock quote = { quote } />
-							</div>
-						))}	
+					<div className="max-w-xl mx-auto mb-4 p-4">
+						<QuoteList quotes = { quotes } />
 					</div>
 				</section>
 			</main>
