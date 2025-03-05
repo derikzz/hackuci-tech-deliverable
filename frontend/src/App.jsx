@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import DatePicker from "./components/DatePicker";
+import HackHeader from "./components/HackHeader";
 import QuoteBlock from "./components/QuoteBlock";
-import quotebook from "./assets/quotebook.webp";
 
 
 function App() {
@@ -51,14 +51,8 @@ function App() {
 	}
 	
 	return (
-		<div className="App">
-			<img
-				src = { quotebook }
-				alt = "Quotebook Icon"
-				style = {{ width: "50px", height: "50px" }}
-			/>
-			
-			<h1>Hack at UCI Tech Deliverable</h1>
+		<div className="App h-full">
+			<HackHeader />
 
 			<h2>Submit a quote</h2>
 			<form onSubmit = { handleSubmit }>
