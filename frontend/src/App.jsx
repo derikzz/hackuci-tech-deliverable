@@ -60,31 +60,35 @@ function App() {
 						<p className = "text-2xl font-bold mb-4" >Submit a quote</p>
 						<form onSubmit = { handleSubmit } className = "space-y-4">
 							<label htmlFor="input-name" className = "font-semibold mb-2">Name</label>
-							<input type="text" name="name" id="input-name" required className = "w-full border border-gray-300 rounded p-2"/>
+							<input type="text" name="name" id="input-name" required className = "w-full border border-blue-300 rounded p-2"/>
 							<label htmlFor="input-message" className = "font-semibold mb-2">Quote</label>
-							<input type="text" name="message" id="input-message" required className = "w-full border border-gray-300 rounded p-2"/>
-							<button type="submit" className = "bg-gray-400 text-white px-4 py-1 rounded hover:bg-gray-500">Submit</button>
+							<input type="text" name="message" id="input-message" required className = "w-full border border-blue-300 rounded p-2"/>
+							<button type="submit" className = "bg-blue-400 text-white px-4 py-1 rounded hover:bg-blue-500">Submit</button>
 						</form>
 					</div>
 				</section>
 
 				<section className = "bg-gray-100 max-w">
-					<p>Earliest Date to Retrieve Quotes</p>
-					<DatePicker
-						date = { date }
-						setDate = { setDate }
-						onSelect = { handleGetQuotes }
-					/>
+					<div className = "max-w-md mx-auto mb-4 p-4">
+						<DatePicker
+							date = { date }
+							setDate = { setDate }
+							onSelect = { handleGetQuotes }
+						/>
+					</div>
 				</section>
 
-				<h2>Previous Quotes</h2>
-				<div className="messages">
-					{quotes.map((quote, index) => (
-						<div key = { index }>
-							<QuoteBlock quote = { quote } />
-						</div>
-					))}	
-				</div>
+				<section className = "bg-white max-w">
+					<div className="max-w-md mx-auto mb-4 p-4">
+						<p className = "text-2xl font-bold mb-4">All Quotes</p>
+
+						{quotes.map((quote, index) => (
+							<div key = { index }>
+								<QuoteBlock quote = { quote } />
+							</div>
+						))}	
+					</div>
+				</section>
 			</main>
 			
 		</div>
